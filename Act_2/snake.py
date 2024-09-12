@@ -29,6 +29,9 @@ food_color = choice([color for color in colors if color != snake_color])
 for body in snake:
     square(body.x, body.y, 9, snake_color)  # <--- SE ASIGNA EL COLOR ALEATORIO DE LA SERPIENTE
 
+# Draw food with random color
+square(food.x, food.y, 9, food_color)  # <--- SE ASIGNA EL COLOR ALEATORIO DE LA COMIDA
+
 def change(x, y):
     """Change snake direction."""
     aim.x = x
