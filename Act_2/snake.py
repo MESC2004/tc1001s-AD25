@@ -24,6 +24,11 @@ colors = ['blue', 'green', 'yellow', 'purple', 'orange']
 snake_color = choice(colors)
 food_color = choice([color for color in colors if color != snake_color])
 
+# Dentro de la función 'move', dibujar la serpiente y la comida con los colores seleccionados
+# Draw snake with random color
+for body in snake:
+    square(body.x, body.y, 9, snake_color)  # <--- SE ASIGNA EL COLOR ALEATORIO DE LA SERPIENTE
+
 def change(x, y):
     """Change snake direction."""
     aim.x = x
