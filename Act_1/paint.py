@@ -35,20 +35,50 @@ def square(start, end):
 
     end_fill()
 
-
-def circle(start, end):
+def draw_circle(start, end):
     """Draw circle from start to end."""
-    pass  # TODO
-
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+    
+    # Draw circle based on radius calculated from start to end
+    radius = ((end.x - start.x) ** 2 + (end.y - start.y) ** 2) ** 0.5
+    setheading(0)  # Ensures the circle starts drawing from a consistent direction
+    circle(radius)
+    
+    end_fill()
 
 def rectangle(start, end):
     """Draw rectangle from start to end."""
-    pass  # TODO
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+
+    # Draw a rectangle
+    for _ in range(2):
+        forward(end.x - start.x)
+        left(90)
+        forward(end.y - start.y)
+        left(90)
+
+    end_fill()
 
 
 def triangle(start, end):
     """Draw triangle from start to end."""
-    pass  # TODO
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+
+    # Draw triangle
+    for _ in range(3):
+        forward(end.x - start.x)
+        left(120)
+
+    end_fill()
 
 
 def tap(x, y):
@@ -68,7 +98,6 @@ def store(key, value):
     """Store value in state at key."""
     state[key] = value
 
-
 state = {'start': None, 'shape': line}
 setup(420, 420, 370, 0)
 onscreenclick(tap)
@@ -79,9 +108,10 @@ onkey(lambda: color('white'), 'W')
 onkey(lambda: color('green'), 'G')
 onkey(lambda: color('blue'), 'B')
 onkey(lambda: color('red'), 'R')
+onkey(lambda: color('purple'), 'P')  # New color
 onkey(lambda: store('shape', line), 'l')
 onkey(lambda: store('shape', square), 's')
-onkey(lambda: store('shape', circle), 'c')
+onkey(lambda: store('shape', draw_circle), 'c')
 onkey(lambda: store('shape', rectangle), 'r')
 onkey(lambda: store('shape', triangle), 't')
 done()
