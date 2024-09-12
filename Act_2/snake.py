@@ -20,6 +20,10 @@ aim = vector(0, -10)
 # List of 5 different colors excluding red
 colors = ['blue', 'green', 'yellow', 'purple', 'orange']
 
+# Select random colors for the snake and food ensuring they are different
+snake_color = choice(colors)
+food_color = choice([color for color in colors if color != snake_color])
+
 def change(x, y):
     """Change snake direction."""
     aim.x = x
