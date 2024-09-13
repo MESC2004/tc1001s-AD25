@@ -134,31 +134,15 @@ def move():
         if valid(point + course):
             point.move(course)
         else:
-            # possible move calculation (up, down, left, right)
             options = [
                 vector(5, 0),
                 vector(-5, 0),
                 vector(0, 5),
                 vector(0, -5),
             ]
-            # Check best choice from options according to pacmans position and walls
-            bestMove = None
-            minimum_dist = float('inf')
-
-            for option in options:
-                next = point + option
-                if valid(next):
-                    # magnitude between ghost and pacman in the grid
-                    distance = (pacman - next).magnitude()
-                    if distance < minumum_dist:
-                        minimun_dist = distance
-                        bestMove = option
-
-            # Apply to ghost
-            if bestMove:
-                course.x = bestMove.x
-                course.y = bestMove.y
-
+            plan = choice(options)
+            course.x = plan.x
+            course.y = plan.y
 
         up()
         goto(point.x + 10, point.y + 10)
