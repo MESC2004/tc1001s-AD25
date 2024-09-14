@@ -19,6 +19,7 @@ tiles = list(range(32)) * 2
 state = {'mark': None}
 hide = [True] * 64
 tap_no = 0 # initialization
+reveal_no = 0
 
 
 def square(x, y):
@@ -48,6 +49,7 @@ def tap(x, y):
     """Update mark and hidden tiles based on tap."""
     # GLOBAL variable to be accessed from other places  
     global tap_no
+    global reveal_no
     spot = index(x, y)
     mark = state['mark']
 
@@ -57,6 +59,7 @@ def tap(x, y):
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
+        reveal_no += 2
 
     tap_no += 1
 
@@ -86,13 +89,18 @@ def draw():
         goto(-200, 220)
         color('black')
         write(f"Taps: {tap_no}", font=('Arial', 25, 'normal'))
+        
+        up()
+        goto(-50, 220)
+        color('black')
+        write(f"Revealed: {reveal_no}", font=('Arial', 25, 'normal'))
 
     update()
     ontimer(draw, 100)
 
 
 shuffle(tiles)
-setup(420, 420, 370, 0)
+setup(600, 600, 370, 0)
 addshape(car)
 hideturtle()
 tracer(False)
