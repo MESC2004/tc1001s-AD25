@@ -81,19 +81,19 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
+        goto(x + 4, y + 2)  # Might need tweaking to get them to center properly
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
 
-        up()
-        goto(-200, 220)
-        color('black')
-        write(f"Taps: {tap_no}", font=('Arial', 25, 'normal'))
-        
-        up()
-        goto(-50, 220)
-        color('black')
-        write(f"Revealed: {reveal_no}", font=('Arial', 25, 'normal'))
+    up()
+    goto(-200, 220)
+    color('black')
+    write(f"Taps: {tap_no}", font=('Arial', 25, 'normal'))
+    
+    up()
+    goto(-50, 220)
+    color('black')
+    write(f"Revealed: {reveal_no}", font=('Arial', 25, 'normal'))
 
     update()
     ontimer(draw, 100)
