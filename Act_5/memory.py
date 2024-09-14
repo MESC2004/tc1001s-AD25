@@ -83,7 +83,7 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 4, y + 2)  # Might need tweaking to get them to center properly
+        goto(x + 10, y + 2)  # Might need tweaking to get them to center properly
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
 
