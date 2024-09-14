@@ -15,9 +15,13 @@ from turtle import *
 from freegames import path
 
 car = path('car.gif')
-tiles = list(range(32)) * 2
+tiles = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 
+ 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '@', '#', '$', '%', '^'] * 2
+
 state = {'mark': None}
 hide = [True] * 64
+tap_no = 0 # initialization
+reveal_no = 0
 
 
 def square(x, y):
@@ -45,6 +49,9 @@ def xy(count):
 
 def tap(x, y):
     """Update mark and hidden tiles based on tap."""
+    # GLOBAL variable to be accessed from other places  
+    global tap_no
+    global reveal_no
     spot = index(x, y)
     mark = state['mark']
 
@@ -54,6 +61,9 @@ def tap(x, y):
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
+        reveal_no += 2
+
+    tap_no += 1
 
 
 def draw():
@@ -73,16 +83,26 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
+        goto(x + 10, y + 2)  # Might need tweaking to get them to center properly
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
+
+    up()
+    goto(-200, 220)
+    color('black')
+    write(f"Taps: {tap_no}", font=('Arial', 25, 'normal'))
+    
+    up()
+    goto(-50, 220)
+    color('black')
+    write(f"Revealed: {reveal_no}", font=('Arial', 25, 'normal'))
 
     update()
     ontimer(draw, 100)
 
 
 shuffle(tiles)
-setup(420, 420, 370, 0)
+setup(600, 600, 370, 0)
 addshape(car)
 hideturtle()
 tracer(False)
